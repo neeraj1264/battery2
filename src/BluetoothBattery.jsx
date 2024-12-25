@@ -64,12 +64,12 @@ const BluetoothBattery = () => {
       <button onClick={handleConnect} style={{ padding: '10px 20px', fontSize: '16px' }}>
         Connect to Bluetooth Device
       </button>
-      {deviceName && <p>Connected to: {deviceName}</p>}
-      {deviceUUID && <p>Device UUID: {deviceUUID}</p>}
-      {serviceUUID && <p>Service UUID: {serviceUUID}</p>}
-      {characteristicUUID && <p>Characteristic UUID: {characteristicUUID}</p>}
-      {batteryLevel !== null && <p>Battery Level: {batteryLevel}%</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {deviceName && <p>Connected to: {deviceName}</p>/n}
+      {deviceUUID && <p>Device UUID: {deviceUUID}</p>/n}
+      {serviceUUID && <p>Service UUID: {serviceUUID}</p>/n}
+      {characteristicUUID && <p>Characteristic UUID: {characteristicUUID}</p>/n}
+      {batteryLevel !== null && <p>Battery Level: {batteryLevel}%</p>/n}
+      {error && <p style={{ color: 'red' }}>{error}</p>/n}
     </div>
   );
 };
