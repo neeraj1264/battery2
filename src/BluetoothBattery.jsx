@@ -23,18 +23,18 @@ const BluetoothBattery = () => {
       });
 
       setDeviceName(device.name || 'Unknown Device');
-      setDeviceUUID(device.id); // Set the device UUID
+      setDeviceUUID(convertTo128BitUUID(device.id)); // Set the device UUID
 
       // Connect to the GATT server
       const server = await device.gatt.connect();
 
       // Get the Battery Service
       const service = await server.getPrimaryService('battery_service');
-      setServiceUUID(service.uuid); // Set the service UUID
+      setServiceUUID(convertTo128BitUUID(service.uuid)); // Set the service UUID
 
       // Get the Battery Level Characteristic
       const characteristic = await service.getCharacteristic('battery_level');
-      setCharacteristicUUID(characteristic.uuid); // Set the characteristic UUID
+      setCharacteristicUUID(convertTo128BitUUID(characteristic.uuid)); // Set the characteristic UUID
 
       // Read the Battery Level value
       const value = await characteristic.readValue();
@@ -46,6 +46,16 @@ const BluetoothBattery = () => {
       console.error('Error:', err);
       setError('Failed to retrieve battery level. Make sure the device supports Battery Service.');
     }
+  };
+
+  // Function to convert UUID to 128-bit format
+  const convertTo128BitUUID = (uuid) => {
+    // Check if the UUID is already in 128-bit format
+    if (uuid.length === 36) {
+      return uuid;
+    }
+    // Convert shorter UUIDs (e.g., 16-bit) to 128-bit by appending to a base string
+    return `0000${uuid}-0000-1000-8000-00805f9b34fb`;
   };
 
   return (
